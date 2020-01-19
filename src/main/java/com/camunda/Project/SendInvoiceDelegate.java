@@ -7,10 +7,9 @@ public class SendInvoiceDelegate implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-	
+
 		execution.getProcessEngineServices().getRuntimeService()
-		.createMessageCorrelation("InvoiceMessage")
+		.createMessageCorrelation("InvoiceMessages")
 		.correlate();
-	
 	}
 }
