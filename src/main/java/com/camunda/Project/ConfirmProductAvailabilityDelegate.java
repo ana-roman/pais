@@ -1,32 +1,33 @@
 package com.camunda.Project;
 
 import java.util.HashMap;
-
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+
 public class ConfirmProductAvailabilityDelegate implements JavaDelegate {
 
-	private HashMap<String, Integer> productList = new HashMap<String, Integer>();
-	private boolean inStock;
+	private HashMap<String, Integer> stock = new HashMap<String, Integer>();
+	private boolean isAvailable = false;
+	private String productName;
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-	
-		// Manually defined list of products - will act as our 'database'
-		productList.put("apple", 30);
-		productList.put("pear", 50);
 		
-	    // Get the product that we ask for in the process
-		String productName = (String) execution.getVariable("productName");
+		stock.put("apple", 10);
+		stock.put("pear", 0);
+		productName = (String) execution.getVariable("productName");
 		
-		// Simple check to determine if we actually have that product
-		inStock = productList.containsKey(productName);
-		if (inStock) {
-			execution.setVariable("price", productList.get(productName));
+		if (stock.get(productName) != 0) {
+			isAvailable  = true;
+			System.out.println("The product is available");
+		} else {
+			System.out.println("The product is no longer available");
+			execution.setVariable("isAvailable", isAvailable);
+			execution.setVariable("amount", stock.get(productName));
+			
+			throw new BpmnError("Product_No_Longer_Available");
 		}
-		
-		// Set the variable for the model
-		execution.setVariable("productInStock", inStock);
 	}
 }
