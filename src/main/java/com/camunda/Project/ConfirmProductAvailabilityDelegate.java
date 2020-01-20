@@ -15,7 +15,7 @@ public class ConfirmProductAvailabilityDelegate implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		stock.put("apple", 10);
+		stock.put("apple", 120);
 		stock.put("pear", 0);
 		productName = (String) execution.getVariable("productName");
 		

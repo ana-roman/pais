@@ -14,7 +14,7 @@ public class CheckProductInStockDelegate implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 	
 		// Manually defined list of products - will act as our 'database'
-		productList.put("apple", 30);
+		productList.put("apple", 120);
 		productList.put("pear", 50);
 		
 	    // Get the product that we ask for in the process
