@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_06gm7gq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="complaint_process" name="complaint_process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Received complaint">
+      <bpmn:outgoing>SequenceFlow_030mwqe</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_18m2szd" messageRef="Message_1nn5dh0" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_030mwqe" sourceRef="StartEvent_1" targetRef="AddInComplainList" />
+    <bpmn:endEvent id="EndEvent_1po459k">
+      <bpmn:incoming>SequenceFlow_13guuzq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_13guuzq" sourceRef="AddInComplainList" targetRef="EndEvent_1po459k" />
+    <bpmn:sequenceFlow id="SequenceFlow_02hx0ao" sourceRef="AddInComplainList" targetRef="Task_160zosc" />
+    <bpmn:userTask id="Task_160zosc" name="Handle the complaints">
+      <bpmn:incoming>SequenceFlow_02hx0ao</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="AddInComplainList" name="Add in the complaint list" camunda:class="com.camunda.Project.AddComplaintInList">
+      <bpmn:incoming>SequenceFlow_030mwqe</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_13guuzq</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_02hx0ao</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_1nn5dh0" name="complaint" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="complaint_process">
+      <bpmndi:BPMNShape id="StartEvent_12xbi21_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="173" y="142" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_030mwqe_di" bpmnElement="SequenceFlow_030mwqe">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="300" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1po459k_di" bpmnElement="EndEvent_1po459k">
+        <dc:Bounds x="662" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_13guuzq_di" bpmnElement="SequenceFlow_13guuzq">
+        <di:waypoint x="400" y="117" />
+        <di:waypoint x="662" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_02hx0ao_di" bpmnElement="SequenceFlow_02hx0ao">
+        <di:waypoint x="400" y="117" />
+        <di:waypoint x="490" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0y9xve7_di" bpmnElement="Task_160zosc">
+        <dc:Bounds x="490" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0322u6g_di" bpmnElement="AddInComplainList">
+        <dc:Bounds x="300" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

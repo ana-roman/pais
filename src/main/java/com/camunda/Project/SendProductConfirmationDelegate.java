@@ -9,11 +9,12 @@ public class SendProductConfirmationDelegate implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 	
 		boolean inStock = (boolean) execution.getVariable("productInStock");
+		Integer price = (Integer) execution.getVariable("price");
 		
 		execution.getProcessEngineServices().getRuntimeService()
-		.createMessageCorrelation("ProductInStock")
+		.createMessageCorrelation("AvailabilityAndPrice")
 		.setVariable("productInStock", inStock)
+		.setVariable("price", price)
 		.correlate();
-	
 	}
 }
