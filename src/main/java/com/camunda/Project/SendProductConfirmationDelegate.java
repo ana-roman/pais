@@ -16,6 +16,5 @@ public class SendProductConfirmationDelegate implements JavaDelegate {
 		.setVariable("productInStock", inStock)
 		.setVariable("price", price)
 		.correlate();
-	
 	}
 }

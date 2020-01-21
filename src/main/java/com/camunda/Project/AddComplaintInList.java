@@ -16,10 +16,7 @@ public class AddComplaintInList implements JavaDelegate {
 		Integer highPrice = (Integer) execution.getVariable("ProductPrice");
 		String comment = (String) execution.getVariable("ComplaintComment");
 		
-		
 		Complaints complaint = new Complaints(product, highPrice, comment);
-		
-		
 	}
 	
 	public class Complaints {
@@ -27,8 +24,6 @@ public class AddComplaintInList implements JavaDelegate {
 		String comment;
 		Integer productPrice;
 	
-	  
-
 	   public Complaints(String product, Integer price, String complaintComment) {
 	      // This constructor has one parameter, name.
 	     productName = product;

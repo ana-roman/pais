@@ -11,6 +11,5 @@ public class SendOrderDelegate implements JavaDelegate {
 		execution.getProcessEngineServices().getRuntimeService()
 		.createMessageCorrelation("OrderMessage")
 		.correlate();
-	
 	}
 }

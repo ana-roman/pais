@@ -5,7 +5,10 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-
+/**
+ * Adds an extra check right before sending the products
+ * to see if the product is indeed in stock at the given moment.
+ */
 public class ConfirmProductAvailabilityDelegate implements JavaDelegate {
 
 	private HashMap<String, Integer> stock = new HashMap<String, Integer>();
@@ -15,8 +18,12 @@ public class ConfirmProductAvailabilityDelegate implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
+		//the stock 'database'
 		stock.put("apple", 120);
-		stock.put("pear", 0);
+		stock.put("pear", 10);
+		stock.put("bananas", 0);
+		stock.put("oranges", 20);
+		
 		productName = (String) execution.getVariable("productName");
 		
 		if (stock.get(productName) != 0) {
